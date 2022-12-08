@@ -8,6 +8,10 @@ tous les détails techniques et historique de la vie de l'appareillage.
 Ce systeme inclut également la gestion d'équipements de maintenance: pièces détachées, huiles et documentations
 lié au fonctionnement de ces appareillages.
 
+![visiopompe_v1](https://user-images.githubusercontent.com/39690470/206483418-7546e4ff-a0ff-46c1-a88e-5979fa18f48b.jpg)
+![visiopompe_menu_pompe](https://user-images.githubusercontent.com/39690470/206483441-7cd5caa8-cabb-4cfb-893f-fb7baf60b482.jpg)
+
+
 ## Pour commencer
 
 ### Pré-requis
