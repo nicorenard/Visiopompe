@@ -1,0 +1,229 @@
+{% extends 'pompe/base.html' %}
+{% load static %}
+
+{% block title %}Gestions des lieux{% endblock %}
+{% block content %}
+<div class="w3-main w3-mobile" style="margin-left:200px">
+    <div class="w3-container w3-dark-grey">
+        <h2>Gestions des Locaux</h2>
+    </div>
+    <br><br>
+    <section>
+        <table class="w3-table w3-centered w3-mobile" style="margin-left:10px; margin-right:10px;">
+            <tr>
+                <td>
+                    <div class="w3-row-padding">
+                        <div class="w3-col ">
+                            <div class="w3-card w3-text-black">
+                                <table class="w3-table-all w3-centered w3-striped w3-mobile">
+                                    <header class="w3-container w3-orange"> <h4>Pièces </h4></header>
+                                    <tr class="w3-grey">
+                                        <th><p>Site</p></th>
+                                        <th><p>Bâtiment</p></th>
+                                        <th><p>Etage</p></th>
+                                        <th><p>Pièce</p></th>
+                                        <th></th>
+                                        <th><p>Modifier </p></th>
+                                        <th><p>Supprimer </p></th>
+                                    </tr>
+                                    <tr>
+                                         {% for piece in pieces %}
+                                        <td><p>{{piece.etage.batiment.site.nom}}</p> </td>
+                                        <td><p>{{piece.etage.batiment.nom}}</p></td>
+                                        <td><p>{{piece.etage.nom}}</p></td>
+                                        <td><p><strong>{{piece.nom}}</strong></p></td>
+                                        <td><p>||</p></td>
+                                        <td><button class="w3-button"><a href="{% url 'pompe:piece_edit' pk=piece.pk %}"><img src="{% static 'pompe/img/option/icons_edit.png' %}" style="width:60%;"/></a></button></td>
+                                        <td><form method="POST" action="{% url 'pompe:piece_delete' pk=piece.pk %}" onsubmit="return confirm('Etes-vous sur de vouloir effacer cette pièce ?')">
+                                        {% csrf_token %}
+                                        <button class="w3-button" type="submit"><img src="{% static 'pompe/img/option/icons_delete.png' %}" style="width:60%;" /></button>
+                                        </form></td>
+                                    </tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="w3-row-padding">
+                        <div class="w3-col ">
+                            <div class="w3-card w3-text-black">
+                                <header class="w3-container w3-orange">
+                                    <h4>Pièces</h4>
+                                </header>
+                                <div class="w3-container">
+                                    <form method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <table>
+                                            {{form4.as_p}}
+                                        </table>
+                                        <button class="w3-button w3-green" type="submit" name="piece_form">Enregistrer</button>
+                                        <button class="w3-button w3-red"><a href="{% url 'pompe:lieux' %}">Annuler</a></button>
+                                    </form>
+                                    <br/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="w3-row-padding">
+                        <div class="w3-col ">
+                            <div class="w3-card w3-text-black">
+                                <div class="w3-container w3-amber">
+                                    <h4>Sites enregistrés</h4>
+                                </div>
+                                <div class="w3-container">
+                                    <table class="w3-table w3-centered w3-mobile">
+                                        <tr>{% for piece in sites %}
+                                        <td><p>{{piece.nom}}</p> </td>
+                                        <td><p>||</p></td>
+                                        <td><button class="w3-button"><a href="{% url 'pompe:site_edit' pk=piece.pk %}"><img src="{% static 'pompe/img/option/icons_edit.png' %}" style="width:60%;"></a></button></td>
+                                        <td><form method="POST" action="{% url 'pompe:site_delete' pk=piece.pk %}" onsubmit="return confirm('Etes-vous sur de vouloir effacer ce site ?')">
+                                        {% csrf_token %}
+                                        <button class="w3-button" type="submit"><img src="{% static 'pompe/img/option/icons_delete.png' %}" style="width:60%;" /></button>
+                                        </form></td>
+                                        </tr>
+                                            {% endfor %}
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="w3-row-padding">
+                        <div class="w3-col ">
+                            <div class="w3-card w3-text-black">
+                                <header class="w3-container w3-amber">
+                                    <h4>Sites</h4>
+                                </header>
+                                <div class="w3-container">
+                                    <p>Formulaire d'ajout</p>
+                                    <form method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <table>
+                                        {{form.as_p}}
+                                        </table>
+                                        <button class="w3-button w3-green" name="site_form" type="submit" >Enregistrer</button>
+                                        <button class="w3-button w3-red"><a href="{% url 'pompe:lieux' %}">Annuler</a></button>
+                                    </form>
+                                    <br/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="w3-row-padding">
+                        <div class="w3-col ">
+                            <div class="w3-card w3-text-black">
+                                <div class="w3-container w3-amber">
+                                    <h4>Bâtiments enregistrés</h4>
+                                </div>
+                                <div class="w3-container">
+                                    <table class="w3-table w3-centered w3-mobile">
+                                        <tr>
+                                        {% for piece in batiments %}
+                                        <td><p>{{piece.nom}}</p> </td>
+                                        <td><p>{{piece.site.nom}}</p> </td>
+                                        <td><p>||</p></td>
+                                         <td><button class="w3-button"><a href="{% url 'pompe:batiment_edit' pk=piece.pk %}"><img src="{% static 'pompe/img/option/icons_edit.png' %}" style="width:60%;" /></a></button></td>
+                                        <td><form method="POST" action="{% url 'pompe:batiment_delete' pk=piece.pk %}" onsubmit="return confirm('Etes-vous sur de vouloir effacer ce bâtiment ?')">
+                                        {% csrf_token %}
+                                        <button class="w3-button" type="submit"><img src="{% static 'pompe/img/option/icons_delete.png' %}" style="width:60%;" /></button>
+                                        </form></td>
+                                        </tr>
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="w3-row-padding">
+                        <div class="w3-col ">
+                            <div class="w3-card w3-text-black">
+                                <header class="w3-container w3-amber">
+                                    <h4>Bâtiments</h4>
+                                </header>
+                                <div class="w3-container">
+                                    <p>Formulaire d'ajout</p>
+                                    <form method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                    <table>
+                                        {{form2.as_p}}
+                                    </table>
+                                    <button class="w3-button w3-green" type="submit" name="batiment_form">Enregistrer</button>
+                                    <button class="w3-button w3-red"><a href="{% url 'pompe:lieux' %}">Annuler</a></button>
+                                    </form>
+                                    <br/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="w3-row-padding">
+                        <div class="w3-col ">
+                            <div class="w3-card w3-text-black">
+                                <div class="w3-container w3-amber">
+                                    <h4>Etages enregistrés</h4>
+                                </div>
+                                <div class="w3-container">
+                                    <table class="w3-table w3-centered w3-mobile">
+                                    <tr>
+                                         {% for piece in etages %}
+                                        <td><p>{{piece.nom}}</p></td>
+                                        <td><p>{{piece.batiment.nom}}</p></td>
+                                        <td><p>{{piece.batiment.site.nom}}</p></td>
+                                        <td><p>||</p></td>
+                                        <td><button class="w3-button"><a href="{% url 'pompe:etage_edit' pk=piece.pk %}"><img src="{% static 'pompe/img/option/icons_edit.png' %}" style="width:60%;" /></a></button></td>
+                                        <td><form method="POST" action="{% url 'pompe:etage_delete' pk=piece.pk %}" onsubmit="return confirm('Etes-vous sur de vouloir effacer cet étage ?')">
+                                        {% csrf_token %}
+                                        <button class="w3-button" type="submit"><img src="{% static 'pompe/img/option/icons_delete.png' %}" style="width:60%;" /></button>
+                                        </form></td>
+                                    </tr>
+                                    {% endfor %}
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="w3-row-padding">
+                        <div class="w3-col ">
+                            <div class="w3-card w3-text-black">
+                                <header class="w3-container w3-amber">
+                                    <h4>Etages</h4>
+                                </header>
+                                <div class="w3-container">
+                                    <p>Formulaire d'ajout</p>
+                                   <form method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <table>
+                                            {{form3.as_p}}
+                                        </table>
+                                        <button class="w3-button w3-green" type="submit" name="etage_form">Enregistrer</button>
+                                        <button class="w3-button w3-red"><a href="{% url 'pompe:lieux' %}">Annuler</a></button>
+                                   </form>
+                                    <br/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </section>
+</div>
+{% endblock %}
