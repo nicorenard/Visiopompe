@@ -1,6 +1,6 @@
 #### VISIOPOMPE PROJECT #####
 
-Visiopompe est un mini projet développé via python 3 avec le Framework django.
+.Visiopompe est un mini projet développé via python 3 avec le Framework django.
 Ce projet à pour but de centraliser et de mettre en place un systeme de gestion d'un parc de matériel mécanique de type
 pompes à membranes et pompes à palettes au sein d'un laboratoire.
 Le listing des pompes peut se faire sur plusieurs niveaux de localisations ( Site -> emplacements dans une pièce) avec
@@ -18,13 +18,13 @@ lié au fonctionnement de ces appareillages.
 ```
 sudo apt install python3-venv
 ```
->Créez un nouveau 'virtualenv' dédié au projet visiopompe dans
+Créez un nouveau 'virtualenv' dédié au projet visiopompe dans
 ```
 /opt/local/virtualenvs/visiopompe
 sudo mkdir -p /opt/local/virtualenvs/
 python3 -m venv /opt/local/virtualenvs/visiopompe
 ```
-- Installez les dépendances Python tierces, décrites dans le fichier "requirements.txt"
+Installez les dépendances Python tierces, décrites dans le fichier "requirements.txt"
   du projet, dans ce nouveau virtualenv, à l'aide du logiciel 'pip' fourni dans ce virtualenv:
 
 ```
@@ -32,7 +32,7 @@ python3 -m venv /opt/local/virtualenvs/visiopompe
 ```
 > NB: Si vous développez sous Windows, vous pourriez également avoir besoin des dépendances additionnelles liés à windows!
 
-- Placez les sources Python du projet 'visiopompe' dans un répertoire dédié,
+Placez les sources Python du projet 'visiopompe' dans un répertoire dédié,
   par ex. /opt/local/visiopompe/0.1:
 
 ```
@@ -42,14 +42,14 @@ sudo cp -R path/to/visiopompe/src/* /opt/local/visiopompe/0.1/
 Vous pouvez maintenant créer un nouveau "projet" 'visiopompe', une nouvelle instance,
 avec ses propres configuration, base de données, fichiers uploadés, etc.!
 
-- Créer un fichier .env et placez le dans le dossier "src" avant de l'uploader sur votre serveur :
-> Structure du fichier.:
+Créer un fichier .env et placez le dans le dossier "src" avant de l'uploader sur votre serveur :
+ Structure du fichier:
 ```
     SECRET_KEY = **Introduisez une clé secrète**
     DJANGO_DEBUG = False
     ALLOWED_HOSTS = **mettre l'adresse IP**
 ```
-- Paramétrez l’accès à base de données via le fichier "setting.py" contenu dans "/src/config".
+ Paramétrez l’accès à base de données via le fichier "setting.py" contenu dans "/src/config".
 Pour cela il est nécessaire de modifier la configuration de la base de données si vous ne souhaitez pas
 la base de données par défault : SQLite.
 
@@ -77,20 +77,20 @@ DATABASES = {
 ```
 ### Installation
 
-##[ HTML ]
--Changez dans le fichier HTML : "pompe/templates/navbar.html" l'adresse mail du support et indiquez celui de
+## [ HTML ]
+Changez dans le fichier HTML : "pompe/templates/navbar.html" l'adresse mail du support et indiquez celui de
 l'administrateur en charge du projet.
 
 
 
-##[ ADMIN ]
-- Si vous souhaitez faire un import massif ou un export . il existe cette option dans la partie administration du site.
+## [ ADMIN ]
+Si vous souhaitez faire un import massif ou un export . il existe cette option dans la partie administration du site.
 L'import/export est possible pour les fiches suivantes :
---"modèles de pompes","stocks"
---"huiles","pièces détachées","documentations techniques"
---"tutelles","les codes inventaires"
---"les équipes","les fabriquants de pompes"
---"sites", "bâtiments", "étages", "pièces"
+- "modèles de pompes","stocks"
+- "huiles","pièces détachées","documentations techniques"
+- "tutelles","les codes inventaires"
+- "les équipes","les fabriquants de pompes"
+- "sites", "bâtiments", "étages", "pièces"
 
 Pour accéder à la partie administration, faite la commande suivante:
 ```
@@ -107,7 +107,7 @@ l'import se fait via le template délivré dans le dossier "importation".
 Il est conseillé d'importer au format CSV.
 Note : Ce fichier csv et le dossier "importation" ne sont pas à laisser sur votre serveur.
 
-##[ DIVERS ]
+## [ DIVERS ]
 - Le dossier "documentations" est informatif et concernera un developpeur et sysadmin.
 Il ne doit pas être laissé sur le serveur de production (inutile).
 
@@ -121,60 +121,60 @@ parc de pompes ou les autres éléments necessaires au fonctionnement de l'appli
 
 /!\ Pour débuter, commencez par remplir dans l'ordre suivant les différentes rubriques AVANT de compléter un modèle de
 pompe et un stock.
-
-1 - [Menu] Administration / Lieux
-1.1 - Sites
-1.2 - Bâtiments
-1.3 - Etages
-1.4 - Pièces
-2 - [Menu] Administration / Fabriquants
-3 - [Menu] Administration / Modèles des pompes
-3.1 - Technologie de pompe
-3.2 - Fiches de pompe
-4 - [Menu] Pompes / Créer un stock
-
+```
+[Menu] Administration / Lieux
+Sites
+Bâtiments
+Etages
+Pièces
+[Menu] Administration / Fabriquants
+[Menu] Administration / Modèles des pompes
+Technologie de pompe
+Fiches de pompe
+[Menu] Pompes / Créer un stock
+```
 /!\ Un stock a besoin pour être créé, à minima, de ces informations là.
 Il est rudement conseillé de compléter les autres élements pour un meilleur suivi de vos machines.
 Se référer à la documentation utilisateur pour plus de détail.
 
-
 Par la suite, la navigation au sein du site web se fait grâce au menu à gauche.
 
-[BONUS]
-- Cas de la Dashboard.
+## [BONUS]
+Cas de la Dashboard.
 
-****[Nécessite de l'aide d'un dev **Evaluez selon votre besoin**]****
+```[Nécessite de l'aide d'un dev **Evaluez selon votre besoin**]```
 
 L'application propose d'avoir la possibilité de voir un menu dashboard
 qui reprend les informations de suivis des stocks, accessoires et pompes présentes.
 Le format qui est proposé en prévu pour une utilisation "standard".
 Si vous souhaitez agrémenter la dashboard en fonction de vos besoins par exemple des stocks de pompes par étages, batiments, un site,
-vous devez pour cela modifier le fichier suivant : dashboard.html situé dans ".src/pompe/templates/pompe".
+vous devez pour cela modifier le fichier suivant : 
+- dashboard.html situé dans ".src/pompe/templates/pompe".
 Vous devez aussi modifier le fichier de l'application : views.py.
 
 ### VIEW.py
->>ligne  28 : ajoutez ces codes en fonction des besoins
+ligne  28 : ajoutez ces codes en fonction des besoins
 
-Encart pour les sites :
->variable = dash_pompes.filter(etage__batiment__site='x').count()
-x = valeur en base de données en référence à l'id du site en BDD.
-Encart pour les batiments:
-> variable = dash_pompes.filter(etage__batiment='x').count()
-x = valeur en base de données en référence à l'id du batiment en BDD.
-Encart pour les étages:
-> variable = dash_pompes.filter(etage='x').count()
-x = valeur en base de données en référence à l'id de l'étage en BDD.
-Encart pour les pièces:
-> variable = dash_pompes.filter(piece='x').count()
-x = valeur en base de données en référence à l'id de la pièce en BDD .
-Encart par équipes :
-> variable = dash_pompes.filter(equipe='x').count()
-x = valeur en base de données en référence à l'id de l'équipe' en BDD .
-Encart par fabriquants :
-> var = dash_pompes.filter(pompe__fabriquant__='x').count()
-Encart par pompes et technologie associée :
-> var = dash_pompes.filter(pompe__technologie='x').count()
-x = valeur en base de données en référence à la technologie créée.
+- Encart pour les sites :
+-- variable = dash_pompes.filter(etage__batiment__site='x').count()
+--- x = valeur en base de données en référence à l'id du site en BDD.
+- Encart pour les batiments:
+-- variable = dash_pompes.filter(etage__batiment='x').count()
+--- x = valeur en base de données en référence à l'id du batiment en BDD.
+- Encart pour les étages:
+- variable = dash_pompes.filter(etage='x').count()
+--- x = valeur en base de données en référence à l'id de l'étage en BDD.
+- Encart pour les pièces:
+-- variable = dash_pompes.filter(piece='x').count()
+--- x = valeur en base de données en référence à l'id de la pièce en BDD .
+- Encart par équipes :
+-- variable = dash_pompes.filter(equipe='x').count()
+--- x = valeur en base de données en référence à l'id de l'équipe' en BDD .
+- Encart par fabriquants :
+-- var = dash_pompes.filter(pompe__fabriquant__='x').count()
+- Encart par pompes et technologie associée :
+-- var = dash_pompes.filter(pompe__technologie='x').count()
+--- x = valeur en base de données en référence à la technologie créée.
 
 Lorsque vous avez créé une variable et un filtre, il faut l'ajouter à la variable "context" pour la déclarer
 et l'utiliser dans le template dashboard.html.
@@ -198,7 +198,7 @@ Pour créer un block de 4 nouveaux encarts, il faut copier ce code à la suite e
 ```
 La dashboard est un élement modulable. A vous de voir si vous souhaitez ou non l'agrémenter.
 Pour plus d'info sur les couleurs disponible à mettre dans la balise <header> à l'emplacement
- > <header class="w3-couleur">
+-- <header class="w3-couleur">
  Allez sur ce site : https://www.w3schools.com/w3css/w3css_colors.asp
 
 ## Projet fabriqué avec :
@@ -214,10 +214,10 @@ VO - 2021/11
 
 ## Features V1.2
 
-> BDD : Ajouter une ou des tables "images" pour éviter les redondances d'images pour les duplications de stocks, accessoires,
+- BDD : Ajouter une ou des tables "images" pour éviter les redondances d'images pour les duplications de stocks, accessoires,
 kits etc... => optimisation de la place mémoire.
-> HTML : Ajouter un bouton "duplication" pour dupliquer un objet en base de données => gain de temps users
-> SESSION : Création de compte utilisateurs type "equipe" pour les droits sur l'application.
+- HTML : Ajouter un bouton "duplication" pour dupliquer un objet en base de données => gain de temps users
+- SESSION : Création de compte utilisateurs type "equipe" pour les droits sur l'application.
 
 
 ## Auteurs
