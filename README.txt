@@ -15,50 +15,56 @@ lié au fonctionnement de ces appareillages.
 - Installez un serveur linux avec un accès internet (prod testée : debian 11).
 - Configurez le serveur pour recevoir python 3.9.
 - Installez avant de commencer un environnement virtuel:
-
->>>>> sudo apt install python3-venv
+```
+sudo apt install python3-venv
+```
 >>>>> # Créez un nouveau 'virtualenv' dédié au projet visiopompe dans
->>>>> # eg. /opt/local/virtualenvs/visiopompe
->>>>> sudo mkdir -p /opt/local/virtualenvs/
->>>>> python3 -m venv /opt/local/virtualenvs/visiopompe
-
+```
+/opt/local/virtualenvs/visiopompe
+sudo mkdir -p /opt/local/virtualenvs/
+python3 -m venv /opt/local/virtualenvs/visiopompe
+```
 - Installez les dépendances Python tierces, décrites dans le fichier "requirements.txt"
   du projet, dans ce nouveau virtualenv, à l'aide du logiciel 'pip' fourni dans ce virtualenv:
 
->>>>> /opt/local/virtualenvs/visiopompe/bin/pip install -r path/to/visiopompe/requirements.txt
+```
+/opt/local/virtualenvs/visiopompe/bin/pip install -r path/to/visiopompe/requirements.txt
+```
 >>>>> # NB: Si vous développez sous Windows, vous pourriez également avoir besoin
->>>>> # des dépendances additionnelles listées dans "requirements-win32.txt"!
+>>>>> # des dépendances additionnelles liés à windows!
 
 - Placez les sources Python du projet 'visiopompe' dans un répertoire dédié,
   par ex. /opt/local/visiopompe/0.1:
 
->>>>> sudo mkdir -p /opt/local/visiopompe/0.1
->>>>> sudo cp -R path/to/visiopompe/src/* /opt/local/visiopompe/0.1/
-
+```
+sudo mkdir -p /opt/local/visiopompe/0.1
+sudo cp -R path/to/visiopompe/src/* /opt/local/visiopompe/0.1/
+```
 Vous pouvez maintenant créer un nouveau "projet" 'visiopompe', une nouvelle instance,
 avec ses propres configuration, base de données, fichiers uploadés, etc.!
 
 - Créer un fichier .env et placez le dans le dossier "src" avant de l'uploader sur votre serveur :
 >>>>> Structure du fichier.:
-
+```
     SECRET_KEY = **Introduisez une clé secrète**
     DJANGO_DEBUG = False
     ALLOWED_HOSTS = **mettre l'adresse IP**
-
+```
 - Paramétrez l’accès à base de données via le fichier "setting.py" contenu dans "/src/config".
 Pour cela il est nécessaire de modifier la configuration de la base de données si vous ne souhaitez pas
 la base de données par défault : SQLite.
 
 Par défaut la configuration est la suivante:
+```
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
+```
 Vous pourrez la modifier et la configurer comme suit, par exemple pour PostgreSQL:
-
+```
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -69,16 +75,16 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-
+```
 ### Installation
 
-[ HTML ]
+##[ HTML ]
 -Changez dans le fichier HTML : "pompe/templates/navbar.html" l'adresse mail du support et indiquez celui de
 l'administrateur en charge du projet.
 
 
 
-[ ADMIN ]
+##[ ADMIN ]
 - Si vous souhaitez faire un import massif ou un export . il existe cette option dans la partie administration du site.
 L'import/export est possible pour les fiches suivantes :
 --"modèles de pompes","stocks"
@@ -88,9 +94,9 @@ L'import/export est possible pour les fiches suivantes :
 --"sites", "bâtiments", "étages", "pièces"
 
 Pour accéder à la partie administration, faite la commande suivante:
-
->>> python manage.py createsuperuser
-
+```
+python manage.py createsuperuser
+```
 Entrez un login puis un mot de passe. /!\ Le mot de passe n'est pas visible.
 
 Vous pouvez accéder à l'administration de la sorte :
@@ -102,7 +108,7 @@ l'import se fait via le template délivré dans le dossier "importation".
 Il est conseillé d'importer au format CSV.
 Note : Ce fichier csv et le dossier "importation" ne sont pas à laisser sur votre serveur.
 
-[ DIVERS ]
+##[ DIVERS ]
 - Le dossier "documentations" est informatif et concernera un developpeur et sysadmin.
 Il ne doit pas être laissé sur le serveur de production (inutile).
 
@@ -117,7 +123,7 @@ parc de pompes ou les autres éléments necessaires au fonctionnement de l'appli
 /!\ Pour débuter, commencez par remplir dans l'ordre suivant les différentes rubriques AVANT de compléter un modèle de
 pompe et un stock.
 
-1- [Menu] Administration / Lieux
+1 - [Menu] Administration / Lieux
 1.1 - Sites
 1.2 - Bâtiments
 1.3 - Etages
@@ -147,7 +153,7 @@ Si vous souhaitez agrémenter la dashboard en fonction de vos besoins par exempl
 vous devez pour cela modifier le fichier suivant : dashboard.html situé dans ".src/pompe/templates/pompe".
 Vous devez aussi modifier le fichier de l'application : views.py.
 
-# VIEW.py
+### VIEW.py
 >>ligne  28 : ajoutez ces codes en fonction des besoins
 
 Encart pour les sites :
@@ -175,7 +181,7 @@ Lorsque vous avez créé une variable et un filtre, il faut l'ajouter à la vari
 et l'utiliser dans le template dashboard.html.
 par exemple : 'variable_fabriquant':variable_fabriquant
 
-# DASHBOARD.HTML
+### DASHBOARD.HTML
 
 La dashboard fonctionne sous un systeme de container divisé en 4 parties.
 Pour créer un block de 4 nouveaux encarts, il faut copier ce code à la suite entre une balise
@@ -201,7 +207,6 @@ Pour plus d'info sur les couleurs disponible à mettre dans la balise <header> �
 
 ## Changelog
 
-
 **Dernière version stable :** V.1.0
 
 V1.0 - 2022/04
@@ -223,7 +228,7 @@ kits etc... => optimisation de la place mémoire.
 
 ## License
 
-Ce projet est sous licence [EN COURS] -  pour plus d'informations
+Ce projet est sous licence MIT - pour plus d'informations
 
 
 
